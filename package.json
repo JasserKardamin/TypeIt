@@ -1,0 +1,21 @@
+{
+  "name": "therealdeal",
+  "version": "1.0.0",
+  "description": "This is the real deal ",
+  "main": "app.js",
+  "scripts": {
+    "app": "node src/app.js",
+    "build-css": "npx tailwindcss build ./assets/style/style.css -o ./dist/app.css "
+  },
+  "keywords": [
+    "typingApp",
+    "learntotype"
+  ],
+  "author": "Jessy",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15"
+  }
+}
