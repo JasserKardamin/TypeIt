@@ -2,6 +2,7 @@
   "name": "therealdeal",
   "version": "1.0.0",
   "description": "This is the real deal ",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "app": "node src/app.js",

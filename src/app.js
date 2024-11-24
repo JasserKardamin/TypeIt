@@ -1,6 +1,64 @@
+import HandleKeyApply from "../utils/handlekey.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const KeyboardButtons = document.querySelectorAll("span");
+  const MyArrayOfButtons = Array.from(KeyboardButtons);
 
+  var IndexOfButton = 0;
+
+  const ActivateKey = (key, index) => {
+    if (
+      MyArrayOfButtons[IndexOfButton].textContent.toLowerCase() ===
+        key.toLowerCase() ||
+      MyArrayOfButtons[IndexOfButton].parentElement.id == key
+    ) {
+      if (
+        MyArrayOfButtons[IndexOfButton].textContent == "Shift" ||
+        MyArrayOfButtons[IndexOfButton].textContent == "Ctrl" ||
+        MyArrayOfButtons[IndexOfButton].textContent == "Alt"
+      ) {
+        HandleKeyApply(MyArrayOfButtons[IndexOfButton], "enable");
+        IndexOfButton = 0;
+      } else {
+        MyArrayOfButtons[IndexOfButton].parentElement.classList.add("active");
+        IndexOfButton = 0;
+      }
+      IndexOfButton = 0;
+      return;
+    } else {
+      IndexOfButton = IndexOfButton + 1;
+      ActivateKey(key, IndexOfButton);
+    }
+  };
+
+  const DisableKey = (key, index) => {
+    if (
+      MyArrayOfButtons[IndexOfButton].textContent.toLowerCase() ===
+        key.toLowerCase() ||
+      MyArrayOfButtons[IndexOfButton].parentElement.id == key
+    ) {
+      // optimizable
+      if (
+        MyArrayOfButtons[IndexOfButton].textContent == "Shift" ||
+        MyArrayOfButtons[IndexOfButton].textContent == "Ctrl" ||
+        MyArrayOfButtons[IndexOfButton].textContent == "Alt"
+      ) {
+        HandleKeyApply(MyArrayOfButtons[IndexOfButton], "disable");
+        IndexOfButton = 0;
+      } else {
+        MyArrayOfButtons[IndexOfButton].parentElement.classList.remove(
+          "active"
+        );
+        IndexOfButton = 0;
+      }
+      return;
+    } else {
+      IndexOfButton = IndexOfButton + 1;
+      DisableKey(key, IndexOfButton);
+    }
+  };
+
+  /*
   const ActivateKey = (key) => {
     let ButtonNeeded = Array.from(KeyboardButtons).filter((item) => {
       return (
@@ -18,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+
   const DisableKey = (key) => {
     let ButtonNeeded = Array.from(KeyboardButtons).filter((item) => {
       return (
@@ -34,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   };
+
+  */
 
   document.addEventListener("keydown", (event) => {
     event.preventDefault();
