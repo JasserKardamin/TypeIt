@@ -6,95 +6,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var IndexOfButton = 0;
 
-  const ActivateKey = (key, index) => {
-    if (
-      MyArrayOfButtons[IndexOfButton].textContent.toLowerCase() ===
-        key.toLowerCase() ||
-      MyArrayOfButtons[IndexOfButton].parentElement.id == key
-    ) {
-      if (
-        MyArrayOfButtons[IndexOfButton].textContent == "Shift" ||
-        MyArrayOfButtons[IndexOfButton].textContent == "Ctrl" ||
-        MyArrayOfButtons[IndexOfButton].textContent == "Alt"
-      ) {
-        HandleKeyApply(MyArrayOfButtons[IndexOfButton], "enable");
-        IndexOfButton = 0;
-      } else {
-        MyArrayOfButtons[IndexOfButton].parentElement.classList.add("active");
-        IndexOfButton = 0;
-      }
-      IndexOfButton = 0;
-      return;
-    } else {
-      IndexOfButton = IndexOfButton + 1;
-      ActivateKey(key, IndexOfButton);
-    }
-  };
-
-  const DisableKey = (key, index) => {
-    if (
-      MyArrayOfButtons[IndexOfButton].textContent.toLowerCase() ===
-        key.toLowerCase() ||
-      MyArrayOfButtons[IndexOfButton].parentElement.id == key
-    ) {
-      // optimizable
-      if (
-        MyArrayOfButtons[IndexOfButton].textContent == "Shift" ||
-        MyArrayOfButtons[IndexOfButton].textContent == "Ctrl" ||
-        MyArrayOfButtons[IndexOfButton].textContent == "Alt"
-      ) {
-        HandleKeyApply(MyArrayOfButtons[IndexOfButton], "disable");
-        IndexOfButton = 0;
-      } else {
-        MyArrayOfButtons[IndexOfButton].parentElement.classList.remove(
-          "active"
-        );
-        IndexOfButton = 0;
-      }
-      return;
-    } else {
-      IndexOfButton = IndexOfButton + 1;
-      DisableKey(key, IndexOfButton);
-    }
-  };
-
-  /*
   const ActivateKey = (key) => {
-    let ButtonNeeded = Array.from(KeyboardButtons).filter((item) => {
-      return (
-        item.textContent.toLowerCase() === key.toLowerCase() ||
-        item.parentElement.id == key
-      );
-    });
-    ButtonNeeded.forEach((element) => {
-      if (
-        element.textContent.toLowerCase() == key.toLowerCase() ||
-        element.parentElement.id == key
-      ) {
-        element.parentElement.classList.add("active");
-      }
-    });
-  };
+    const modifierKeys = ["Shift", "Ctrl", "Alt"];
 
+    for (let i = 0; i < MyArrayOfButtons.length; i++) {
+      const button = MyArrayOfButtons[i];
+      const buttonText = button.textContent.toLowerCase();
+      const buttonParentId = button.parentElement.id;
+
+      if (buttonText === key.toLowerCase() || buttonParentId === key) {
+        if (modifierKeys.includes(button.textContent)) {
+          HandleKeyApply(button, "enable");
+        } else {
+          button.parentElement.classList.add("active");
+        }
+        return;
+      }
+    }
+  };
 
   const DisableKey = (key) => {
-    let ButtonNeeded = Array.from(KeyboardButtons).filter((item) => {
-      return (
-        item.textContent.toLowerCase() === key.toLowerCase() ||
-        item.parentElement.id == key
-      );
-    });
-    ButtonNeeded.forEach((element) => {
-      if (
-        element.textContent.toLowerCase() == key.toLowerCase() ||
-        element.parentElement.id == key
-      ) {
-        element.parentElement.classList.remove("active");
-      }
-    });
-  };
+    const modifierKeys = ["Shift", "Ctrl", "Alt"];
 
-  */
+    for (let i = 0; i < MyArrayOfButtons.length; i++) {
+      const button = MyArrayOfButtons[i];
+      const buttonText = button.textContent.toLowerCase();
+      const buttonParentId = button.parentElement.id;
+
+      if (buttonText === key.toLowerCase() || buttonParentId === key) {
+        if (modifierKeys.includes(button.textContent)) {
+          HandleKeyApply(button, "disable");
+        } else {
+          button.parentElement.classList.remove("active");
+        }
+        return;
+      }
+    }
+  };
 
   document.addEventListener("keydown", (event) => {
     event.preventDefault();
