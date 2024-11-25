@@ -1,59 +1,6 @@
+import AZERTY from "../src/constants.js";
 let MyCrtls, MyAlts, MyShifts, MyEnters, AllMyKeys;
-const AZERTY = [
-  "ESC",
-  "1 &",
-  "2 é",
-  '3 "',
-  "4 '",
-  "5 (",
-  "6 -",
-  "7 è",
-  "8 _",
-  "9 ç",
-  "0 à",
-  ") ]",
-  "+ =",
-  "BackSpace",
-  "Tab",
-  "A",
-  "Z",
-  "E",
-  "R",
-  "T",
-  "Y",
-  "U",
-  "I",
-  "O",
-  "P",
-  "^ ¨",
-  "$ £",
-  "Enter ",
-  "Capslock",
-  "Q",
-  "S",
-  "D",
-  "F",
-  "G",
-  "H",
-  "J",
-  "K",
-  "L",
-  "M ",
-  "% ù",
-  "* µ",
-  "Shift",
-  "< >",
-  "W",
-  "X",
-  "C",
-  "V",
-  "B",
-  "N",
-  ", ?",
-  "; .",
-  ": /",
-  "! §",
-];
+
 document.addEventListener("DOMContentLoaded", () => {
   //getting needed values
   MyCrtls = document.querySelectorAll(".Ctrl");
@@ -68,7 +15,13 @@ const RenderAzertySkeleton = () => {
   const EnterButton = document.querySelector(".enter");
 
   // modifying the Enterbutton
-  MyLines[1].lastElementChild.classList.add("enter", "font-bold");
+  MyLines[1].lastElementChild.classList.add(
+    "enter",
+    "font-bold",
+    "bg-[#FE6628]",
+    "text-white"
+  );
+  MyLines[1].lastElementChild.classList.remove("bg-white", "text-black");
   EnterButton.classList.remove(
     "w-[90px]",
     "bg-[#FE6628]",
@@ -78,7 +31,7 @@ const RenderAzertySkeleton = () => {
   );
   EnterButton.classList.add("w-[38px]", "bg-white", "text-black");
   const NewEnter = document.createElement("div");
-  NewEnter.classList.add("AzertyEnter", "enter", "bg-white", "text-black");
+  NewEnter.classList.add("AzertyEnter", "enter", "bg-[#FE6628]", "text-black");
   MyLines[2].appendChild(NewEnter);
   //REFRESHING ENTER BUTTONS
   MyEnters = document.querySelectorAll(".enter");
@@ -105,7 +58,7 @@ const RenderAzertySkeleton = () => {
   MyShifts = document.querySelectorAll(".Shift");
 };
 
-const RenderAZERTY = async () => {
+const RenderAZERTY = () => {
   RenderAzertySkeleton();
   let Index = 0;
   AllMyKeys.forEach((keycap) => {
