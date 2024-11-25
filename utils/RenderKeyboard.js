@@ -1,4 +1,4 @@
-import AZERTY from "../src/constants.js";
+import { AZERTY } from "../src/constants.js";
 let MyCrtls, MyAlts, MyShifts, MyEnters, AllMyKeys;
 
 document.addEventListener("DOMContentLoaded", () => {

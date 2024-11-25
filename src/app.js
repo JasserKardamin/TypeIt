@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const KeyboardButtons = document.querySelectorAll("span");
   const MyArrayOfButtons = Array.from(KeyboardButtons);
   const KeyBoardsLayout = document.querySelector("#keyboardlayout");
+  KeyBoardsLayout.value = "QWERTY";
 
   KeyBoardsLayout.addEventListener("change", () => {
     if (KeyBoardsLayout.value == "AZERTY") {

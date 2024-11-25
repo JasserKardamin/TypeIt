@@ -54,4 +54,26 @@ const AZERTY = [
   "! §",
 ];
 
-export default AZERTY;
+const JavaScriptKeywords = [
+  "break",
+  "catch",
+  "class",
+  "const",
+  "false",
+  "final",
+  "float",
+  "for",
+  "goto",
+  "if",
+  "let",
+  "null",
+  "super",
+  "this",
+  "throw",
+  "true",
+  "try",
+  "typeof",
+  "var",
+];
+
+export { AZERTY, JavaScriptKeywords };
