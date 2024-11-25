@@ -1,4 +1,4 @@
-import { MyCrtls, MyAlts, MyShifts } from "../src/constants.js";
+import { MyCrtls, MyAlts, MyShifts, MyEnters } from "./RenderKeyboard.js";
 
 const HandleKeyApply = (element, action) => {
   let TheWorkingTable = [];
@@ -6,9 +6,13 @@ const HandleKeyApply = (element, action) => {
     TheWorkingTable = MyAlts;
   } else if (element.textContent == "Ctrl") {
     TheWorkingTable = MyCrtls;
+  } else if (element.textContent == "Enter") {
+    TheWorkingTable = MyEnters;
+    console.log(MyEnters);
   } else {
     TheWorkingTable = MyShifts;
   }
+
   if (action == "enable") {
     TheWorkingTable.forEach((element) => {
       element.classList.add("active");
@@ -20,4 +24,4 @@ const HandleKeyApply = (element, action) => {
   }
 };
 
-export default HandleKeyApply;
+export { HandleKeyApply };

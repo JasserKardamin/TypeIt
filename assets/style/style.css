@@ -6,3 +6,27 @@
   background-color: #575757;
   color: white;
 }
+
+.AzertyEnter {
+  display: flex;
+  align-items: flex-start;
+  width: 48px;
+  height: 42px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  position: relative;
+  transform: translateY(-4px);
+}
+
+.AzertyShift {
+  min-height: 38px;
+  min-width: 70px;
+  font-size: 12px;
+  display: flex;
+  font-weight: bold;
+  align-items: flex-start;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  position: relative;
+  box-sizing: border-box;
+}

@@ -1,13 +1,21 @@
-import HandleKeyApply from "../utils/handlekey.js";
+import { HandleKeyApply } from "../utils/handlekey.js";
+import { RenderAZERTY } from "../utils/RenderKeyboard.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const KeyboardButtons = document.querySelectorAll("span");
   const MyArrayOfButtons = Array.from(KeyboardButtons);
+  const KeyBoardsLayout = document.querySelector("#keyboardlayout");
 
-  var IndexOfButton = 0;
+  KeyBoardsLayout.addEventListener("change", () => {
+    if (KeyBoardsLayout.value == "AZERTY") {
+      RenderAZERTY();
+    } else {
+      location.reload();
+    }
+  });
 
   const ActivateKey = (key) => {
-    const modifierKeys = ["Shift", "Ctrl", "Alt"];
+    const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
 
     for (let i = 0; i < MyArrayOfButtons.length; i++) {
       const button = MyArrayOfButtons[i];
@@ -26,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const DisableKey = (key) => {
-    const modifierKeys = ["Shift", "Ctrl", "Alt"];
+    const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
 
     for (let i = 0; i < MyArrayOfButtons.length; i++) {
       const button = MyArrayOfButtons[i];
@@ -47,32 +55,28 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     event.preventDefault();
     let key = event.key;
-    if (key == " ") {
-      key = "Space";
-    }
-    if (key == "Escape") {
-      key = "ESC";
-    }
-    if (key == "Control") {
-      key = "Ctrl";
-    }
-    console.log(key);
-
+    const keyMap = {
+      Dead: "^",
+      " ": "Space",
+      "#": "3",
+      Escape: "ESC",
+      Control: "Ctrl",
+    };
+    key = keyMap[key] || key;
     ActivateKey(key);
   });
 
   document.addEventListener("keyup", (event) => {
     event.preventDefault();
     let key = event.key;
-    if (key == " ") {
-      key = "Space";
-    }
-    if (key == "Escape") {
-      key = "ESC";
-    }
-    if (key == "Control") {
-      key = "Ctrl";
-    }
+    const keyMap = {
+      Dead: "^",
+      " ": "Space",
+      "#": "3",
+      Escape: "ESC",
+      Control: "Ctrl",
+    };
+    key = keyMap[key] || key;
     DisableKey(key);
   });
 });
