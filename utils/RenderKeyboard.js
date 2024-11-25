@@ -9,6 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
   AllMyKeys = Array.from(document.querySelectorAll(".keycap"));
 });
 
+const HandleJsonFile = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error loading JSON file:", error);
+  }
+};
+
 const RenderAzertySkeleton = () => {
   const MyLines = Array.from(document.querySelectorAll(".line"));
   const EnterButton = document.querySelector(".enter");
@@ -68,18 +80,6 @@ const RenderAZERTY = async () => {
     }
     Index = Index + 1;
   });
-};
-
-const HandleJsonFile = async (url) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error loading JSON file:", error);
-  }
 };
 
 export { MyCrtls, MyAlts, MyShifts, MyEnters, AllMyKeys, RenderAZERTY };
