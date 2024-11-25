@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (KeyBoardsLayout.value == "AZERTY") {
       RenderAZERTY();
     } else {
-      location.reload();
+      window.location.href = window.location.href;
     }
   });
 
