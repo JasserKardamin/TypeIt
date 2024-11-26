@@ -21,8 +21,9 @@ const RandomisePhrase = () => {
   let Phrase = "";
   for (let index = 0; index < 6; index++) {
     const randomIndex = getRandomBetween(0, JavaScriptKeywords.length);
-    Phrase += JavaScriptKeywords[randomIndex] + " ";
+    Phrase += JavaScriptKeywords[randomIndex] + "∘";
   }
+  Phrase = Phrase.slice(0, -1);
   return Phrase.trim();
 };
 let i = 0;
@@ -31,7 +32,11 @@ let PhraseTable = [];
 
 const HandleTyping = (key) => {
   if (i < WorkingPhrase.length - 1) {
-    if (PhraseTable[i].textContent === key) {
+    if (PhraseTable[i].textContent == "∘" && key == " ") {
+      PhraseTable[i].style.color = "green";
+      PhraseTable[i].style.opacity = "1";
+      i += 1;
+    } else if (PhraseTable[i].textContent === key) {
       PhraseTable[i].style.color = "white";
       PhraseTable[i].style.opacity = "1";
       i += 1;
@@ -48,7 +53,7 @@ const HandleTyping = (key) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  LoadPhrase();
+  //LoadPhrase();
 });
 
-export { HandleTyping };
+export { HandleTyping, LoadPhrase };

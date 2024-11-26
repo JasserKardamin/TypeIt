@@ -1,13 +1,13 @@
 import { HandleKeyApply } from "../utils/handlekey.js";
 import { RenderAZERTY } from "../utils/RenderKeyboard.js";
-import { HandleTyping } from "../utils/HandleTyping.js";
+import { HandleTyping, LoadPhrase } from "../utils/HandleTyping.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const KeyboardButtons = document.querySelectorAll(".keycap");
   const MyArrayOfButtons = Array.from(KeyboardButtons);
   const KeyBoardsLayout = document.querySelector("#keyboardlayout");
   KeyBoardsLayout.value = "QWERTY";
-
+  LoadPhrase();
   KeyBoardsLayout.addEventListener("change", () => {
     if (KeyBoardsLayout.value == "AZERTY") {
       RenderAZERTY();
@@ -69,8 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     key = keyMap[key] || key;
     ActivateKey(key);
-
-    // handeling the typing task (Still negociable tho !)
     HandleTyping(event.key);
   });
 
