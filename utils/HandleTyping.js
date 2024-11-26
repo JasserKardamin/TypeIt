@@ -30,6 +30,20 @@ let i = 0;
 let WorkingPhrase = RandomisePhrase();
 let PhraseTable = [];
 
+const GetBackToTheFirstSpace = () => {
+  const lastSpaceIndex = WorkingPhrase.lastIndexOf("∘", i);
+  console.log(lastSpaceIndex);
+
+  if (lastSpaceIndex !== -1) {
+    for (let index = lastSpaceIndex + 1; index <= i; index++) {
+      PhraseTable[index].style.opacity = "0.3";
+    }
+    i = lastSpaceIndex + 1;
+  } else {
+    i = 0;
+  }
+};
+
 const HandleTyping = (key) => {
   if (i < WorkingPhrase.length - 1) {
     if (PhraseTable[i].textContent == "∘" && key == " ") {
@@ -43,6 +57,7 @@ const HandleTyping = (key) => {
     } else {
       PhraseTable[i].style.color = "red";
       PhraseTable[i].style.opacity = "1";
+      GetBackToTheFirstSpace();
     }
   } else {
     i = 0;

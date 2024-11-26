@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const KeyboardButtons = document.querySelectorAll(".keycap");
   const MyArrayOfButtons = Array.from(KeyboardButtons);
   const KeyBoardsLayout = document.querySelector("#keyboardlayout");
+  const buttonMap = {};
+
   KeyBoardsLayout.value = "QWERTY";
   LoadPhrase();
   KeyBoardsLayout.addEventListener("change", () => {
@@ -16,44 +18,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // fasten the search pace
+  MyArrayOfButtons.forEach((button) => {
+    const key = button.textContent.toLowerCase();
+    const parentId = button.parentElement.id;
+    buttonMap[key] = button;
+    buttonMap[parentId] = button;
+  });
+
   const ActivateKey = (key) => {
+    const button = buttonMap[key.toLowerCase()];
+    if (!button) return;
+
     const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
-
-    for (let i = 0; i < MyArrayOfButtons.length; i++) {
-      const button = MyArrayOfButtons[i];
-      const buttonText = button.textContent.toLowerCase();
-      const buttonParentId = button.parentElement.id;
-
-      if (buttonText === key.toLowerCase() || buttonParentId === key) {
-        if (modifierKeys.includes(button.textContent)) {
-          HandleKeyApply(button, "enable");
-        } else {
-          button.parentElement.classList.add("active");
-        }
-        return;
-      }
+    if (modifierKeys.includes(button.textContent)) {
+      HandleKeyApply(button, "enable");
+    } else {
+      button.parentElement.classList.add("active");
     }
   };
 
   const DisableKey = (key) => {
+    const button = buttonMap[key.toLowerCase()];
+    if (!button) return;
+
     const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
-
-    for (let i = 0; i < MyArrayOfButtons.length; i++) {
-      const button = MyArrayOfButtons[i];
-      const buttonText = button.textContent.toLowerCase();
-      const buttonParentId = button.parentElement.id;
-
-      if (buttonText === key.toLowerCase() || buttonParentId === key) {
-        if (
-          modifierKeys.includes(button.textContent) &&
-          button.classList.contains("keycap")
-        ) {
-          HandleKeyApply(button, "disable");
-        } else {
-          button.parentElement.classList.remove("active");
-        }
-        return;
-      }
+    if (modifierKeys.includes(button.textContent)) {
+      HandleKeyApply(button, "disable");
+    } else {
+      button.parentElement.classList.remove("active");
     }
   };
 
@@ -68,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Control: "Ctrl",
     };
     key = keyMap[key] || key;
+
     ActivateKey(key);
     HandleTyping(event.key);
   });
