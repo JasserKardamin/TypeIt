@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   MyAlts = document.querySelectorAll(".Alt");
   MyShifts = document.querySelectorAll(".Shift");
   MyEnters = document.querySelectorAll(".enter");
-  AllMyKeys = Array.from(document.querySelectorAll(".keycap"));
+  AllMyKeys = Array.from(document.querySelectorAll(".key"));
 });
 
 const RenderAzertySkeleton = () => {

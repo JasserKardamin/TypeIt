@@ -1,8 +1,9 @@
 import { HandleKeyApply } from "../utils/handlekey.js";
 import { RenderAZERTY } from "../utils/RenderKeyboard.js";
+import { HandleTyping } from "../utils/HandleTyping.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const KeyboardButtons = document.querySelectorAll("span");
+  const KeyboardButtons = document.querySelectorAll(".keycap");
   const MyArrayOfButtons = Array.from(KeyboardButtons);
   const KeyBoardsLayout = document.querySelector("#keyboardlayout");
   KeyBoardsLayout.value = "QWERTY";
@@ -43,7 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const buttonParentId = button.parentElement.id;
 
       if (buttonText === key.toLowerCase() || buttonParentId === key) {
-        if (modifierKeys.includes(button.textContent)) {
+        if (
+          modifierKeys.includes(button.textContent) &&
+          button.classList.contains("keycap")
+        ) {
           HandleKeyApply(button, "disable");
         } else {
           button.parentElement.classList.remove("active");
@@ -65,6 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     key = keyMap[key] || key;
     ActivateKey(key);
+
+    // handeling the typing task (Still negociable tho !)
+    HandleTyping(event.key);
   });
 
   document.addEventListener("keyup", (event) => {
