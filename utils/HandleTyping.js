@@ -32,13 +32,16 @@ let PhraseTable = [];
 
 const GetBackToTheFirstSpace = () => {
   const lastSpaceIndex = WorkingPhrase.lastIndexOf("∘", i);
-  console.log(lastSpaceIndex);
 
   if (lastSpaceIndex !== -1) {
     for (let index = lastSpaceIndex + 1; index <= i; index++) {
       PhraseTable[index].style.opacity = "0.3";
     }
-    i = lastSpaceIndex + 1;
+    if (PhraseTable[i].textContent == "∘") {
+      i = lastSpaceIndex;
+    } else {
+      i = lastSpaceIndex + 1;
+    }
   } else {
     i = 0;
   }
