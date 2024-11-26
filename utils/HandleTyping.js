@@ -32,13 +32,12 @@ let PhraseTable = [];
 const HandleTyping = (key) => {
   if (i < WorkingPhrase.length - 1) {
     if (PhraseTable[i].textContent === key) {
-      //PhraseTable[i].style.color = "green";
+      PhraseTable[i].style.color = "white";
       PhraseTable[i].style.opacity = "1";
       i += 1;
     } else {
       PhraseTable[i].style.color = "red";
       PhraseTable[i].style.opacity = "1";
-      i += 1;
     }
   } else {
     i = 0;
