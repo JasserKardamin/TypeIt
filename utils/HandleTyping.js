@@ -43,6 +43,9 @@ const GetBackToTheFirstSpace = () => {
       i = lastSpaceIndex + 1;
     }
   } else {
+    for (let index = i; index >= 0; index--) {
+      PhraseTable[index].style.opacity = "0.3";
+    }
     i = 0;
   }
 };
