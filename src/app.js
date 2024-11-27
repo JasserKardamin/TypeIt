@@ -3,31 +3,36 @@ import { RenderAZERTY } from "../utils/RenderKeyboard.js";
 import { HandleTyping, LoadPhrase } from "../utils/HandleTyping.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const KeyboardButtons = document.querySelectorAll(".keycap");
-  const MyArrayOfButtons = Array.from(KeyboardButtons);
+  const MyArrayOfButtons = Array.from(document.querySelectorAll(".keycap"));
   const KeyBoardsLayout = document.querySelector("#keyboardlayout");
+  KeyBoardsLayout.value = "QWERTY";
   const buttonMap = {};
 
-  KeyBoardsLayout.value = "QWERTY";
+  const BuildButtonMap = () => {
+    MyArrayOfButtons.forEach((button) => {
+      const key = button.textContent.toLowerCase();
+      const parentId = button.parentElement.id;
+      buttonMap[key] = button;
+      buttonMap[parentId] = button;
+    });
+  };
+
   LoadPhrase();
+  BuildButtonMap();
+
   KeyBoardsLayout.addEventListener("change", () => {
     if (KeyBoardsLayout.value == "AZERTY") {
       RenderAZERTY();
+      BuildButtonMap();
     } else {
       window.location.href = window.location.href;
     }
   });
 
-  // fasten the search pace
-  MyArrayOfButtons.forEach((button) => {
-    const key = button.textContent.toLowerCase();
-    const parentId = button.parentElement.id;
-    buttonMap[key] = button;
-    buttonMap[parentId] = button;
-  });
-
   const ActivateKey = (key) => {
     const button = buttonMap[key.toLowerCase()];
+    console.log(key, "=", button.textContent);
+
     if (!button) return;
 
     const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
