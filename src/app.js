@@ -7,13 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const KeyBoardsLayout = document.querySelector("#keyboardlayout");
   KeyBoardsLayout.value = "QWERTY";
   const buttonMap = {};
+  const activeKeys = new Set();
 
   const BuildButtonMap = () => {
     MyArrayOfButtons.forEach((button) => {
-      const key = button.textContent.toLowerCase();
+      const content = button.textContent.toLowerCase();
       const parentId = button.parentElement.id;
-      buttonMap[key] = button;
+      buttonMap[content] = button;
       buttonMap[parentId] = button;
+      if (content.length > 1) {
+        for (const char of content) {
+          buttonMap[char] = button;
+        }
+      }
     });
   };
 
@@ -35,19 +41,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!button) return;
 
-    const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
+    const modifierKeys = ["Shift", "Ctrl", "Enter"];
     if (modifierKeys.includes(button.textContent)) {
       HandleKeyApply(button, "enable");
     } else {
       button.parentElement.classList.add("active");
     }
+    activeKeys.add(key.toLowerCase());
   };
 
   const DisableKey = (key) => {
     const button = buttonMap[key.toLowerCase()];
     if (!button) return;
 
-    const modifierKeys = ["Shift", "Ctrl", "Alt", "Enter"];
+    const modifierKeys = ["Shift", "Ctrl", "Enter"];
     if (modifierKeys.includes(button.textContent)) {
       HandleKeyApply(button, "disable");
     } else {
@@ -57,18 +64,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     event.preventDefault();
+
     let key = event.key;
+
     const keyMap = {
       Dead: "^",
       " ": "Space",
+      AltGraph: "AltG",
       "#": "3",
       Escape: "ESC",
       Control: "Ctrl",
     };
     key = keyMap[key] || key;
 
+    //if (!activeKeys.has(key.toLowerCase())) {
     ActivateKey(key);
     HandleTyping(event.key);
+    //}
   });
 
   document.addEventListener("keyup", (event) => {
@@ -77,11 +89,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const keyMap = {
       Dead: "^",
       " ": "Space",
+      AltGraph: "AltG",
       "#": "3",
       Escape: "ESC",
       Control: "Ctrl",
     };
     key = keyMap[key] || key;
-    DisableKey(key);
+
+    if (event.key == "AltGraph") {
+      Array.from(activeKeys).forEach((cap) => {
+        DisableKey(cap);
+        activeKeys.delete(cap.toLowerCase());
+      });
+    } else {
+      DisableKey(key);
+    }
   });
 });

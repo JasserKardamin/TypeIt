@@ -58,8 +58,8 @@ const GetBackToTheFirstSpace = () => {
 };
 
 const HandleTyping = (key) => {
-  console.log(i);
-  console.log(WorkingPhrase.length - 1);
+  //console.log(i);
+  //console.log(WorkingPhrase.length - 1);
 
   if (i < WorkingPhrase.length - 1) {
     if (PhraseTable[i].textContent == "∘" && key == " ") {
@@ -87,7 +87,7 @@ const HandleTyping = (key) => {
     WorkingPhrase = RandomisePhrase();
     LoadPhrase();
   }
-  console.log(WorkingPhrase);
+  //console.log(WorkingPhrase);
 };
 
 const ClearErrorsAndGoBack = (index) => {
