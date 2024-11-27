@@ -1,5 +1,5 @@
 const AZERTY = [
-  "ESC",
+  "ESC ",
   "1 &",
   "2 é",
   '3 "',
