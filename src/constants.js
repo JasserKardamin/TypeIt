@@ -74,6 +74,8 @@ const JavaScriptKeywords = [
   "try",
   "typeof",
   "var",
+  "[]",
+  '"ayoub"',
 ];
 
 export { AZERTY, JavaScriptKeywords };
