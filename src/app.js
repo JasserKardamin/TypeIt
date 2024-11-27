@@ -9,7 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttonMap = {};
   const activeKeys = new Set();
 
+  const ClearButtonMap = () => {
+    Object.keys(buttonMap).forEach((key) => {
+      delete buttonMap[key];
+    });
+  };
   const BuildButtonMap = () => {
+    ClearButtonMap();
     MyArrayOfButtons.forEach((button) => {
       const content = button.textContent.toLowerCase();
       const parentId = button.parentElement.id;
