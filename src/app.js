@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const parentId = button.parentElement.id;
       buttonMap[content] = button;
       buttonMap[parentId] = button;
-      if (content.length > 1) {
+      if (content.length == 2) {
         for (const char of content) {
           buttonMap[char] = button;
         }
