@@ -29,6 +29,7 @@ const RandomisePhrase = () => {
 let i = 0;
 let WorkingPhrase = RandomisePhrase();
 let PhraseTable = [];
+let FalseInputs = [];
 
 const GetBackToTheFirstSpace = () => {
   const lastSpaceIndex = WorkingPhrase.lastIndexOf("∘", i);
@@ -61,8 +62,14 @@ const HandleTyping = (key) => {
       PhraseTable[i].style.opacity = "1";
       i += 1;
     } else {
+      FalseInputs.forEach((input) => {
+        input.style.color = "white";
+      });
       PhraseTable[i].style.color = "red";
       PhraseTable[i].style.opacity = "1";
+      if (PhraseTable[i].textContent !== "∘") {
+        FalseInputs.push(PhraseTable[i]);
+      }
       GetBackToTheFirstSpace();
     }
   } else {
