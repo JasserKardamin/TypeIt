@@ -58,6 +58,9 @@ const GetBackToTheFirstSpace = () => {
 };
 
 const HandleTyping = (key) => {
+  console.log(i);
+  console.log(WorkingPhrase.length - 1);
+
   if (i < WorkingPhrase.length - 1) {
     if (PhraseTable[i].textContent == "∘" && key == " ") {
       PhraseTable[i].style.color = "green";
@@ -72,23 +75,32 @@ const HandleTyping = (key) => {
       i += 1;
       PhraseTable[i].style.borderBottom = "4px solid white";
     } else {
-      FalseInputs.forEach((input) => {
-        input.style.color = "white";
-      });
-      PhraseTable[i].style.color = "red";
-      PhraseTable[i].style.opacity = "1";
-      if (PhraseTable[i].textContent !== "∘") {
-        FalseInputs.push(PhraseTable[i]);
-      }
-      PhraseTable[i].style.borderBottom = "";
-      GetBackToTheFirstSpace();
+      ClearErrorsAndGoBack(i);
     }
+  } else if (
+    i == WorkingPhrase.length - 1 &&
+    PhraseTable[i].textContent !== key
+  ) {
+    ClearErrorsAndGoBack(i);
   } else {
     i = 0;
     WorkingPhrase = RandomisePhrase();
     LoadPhrase();
   }
   console.log(WorkingPhrase);
+};
+
+const ClearErrorsAndGoBack = (index) => {
+  FalseInputs.forEach((input) => {
+    input.style.color = "white";
+  });
+  PhraseTable[index].style.color = "red";
+  PhraseTable[index].style.opacity = "1";
+  if (PhraseTable[index].textContent !== "∘") {
+    FalseInputs.push(PhraseTable[index]);
+  }
+  PhraseTable[index].style.borderBottom = "";
+  GetBackToTheFirstSpace();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
