@@ -11,7 +11,7 @@ const LoadPhrase = () => {
     PhraseSpaceHolder.appendChild(NewLetter);
     PhraseTable = Array.from(document.querySelectorAll(".Phraseletter"));
   }
-  PhraseTable[i].style.borderBottom = "4px solid white";
+  PhraseTable[i].style.borderBottom = "2px solid white";
 };
 
 function getRandomBetween(min, max) {
@@ -42,10 +42,10 @@ const GetBackToTheFirstSpace = () => {
     }
     if (PhraseTable[i].textContent == "∘") {
       i = lastSpaceIndex;
-      PhraseTable[i].style.borderBottom = "4px solid white";
+      PhraseTable[i].style.borderBottom = "2px solid white";
     } else {
       i = lastSpaceIndex + 1;
-      PhraseTable[i].style.borderBottom = "4px solid white";
+      PhraseTable[i].style.borderBottom = "2px solid white";
     }
   } else {
     //original opacity
@@ -53,7 +53,7 @@ const GetBackToTheFirstSpace = () => {
       PhraseTable[index].style.opacity = "0.3";
     }
     i = 0;
-    PhraseTable[i].style.borderBottom = "4px solid white";
+    PhraseTable[i].style.borderBottom = "2px solid white";
   }
 };
 
@@ -67,13 +67,13 @@ const HandleTyping = (key) => {
       PhraseTable[i].style.opacity = "1";
       PhraseTable[i].style.borderBottom = "";
       i += 1;
-      PhraseTable[i].style.borderBottom = "4px solid white";
+      PhraseTable[i].style.borderBottom = "2px solid white";
     } else if (PhraseTable[i].textContent === key) {
       PhraseTable[i].style.color = "white";
       PhraseTable[i].style.opacity = "1";
       PhraseTable[i].style.borderBottom = "";
       i += 1;
-      PhraseTable[i].style.borderBottom = "4px solid white";
+      PhraseTable[i].style.borderBottom = "2px solid white";
     } else {
       ClearErrorsAndGoBack(i);
     }

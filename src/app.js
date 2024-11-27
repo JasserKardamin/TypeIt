@@ -1,6 +1,16 @@
 import { HandleKeyApply } from "../utils/handlekey.js";
 import { RenderAZERTY } from "../utils/RenderKeyboard.js";
 import { HandleTyping, LoadPhrase } from "../utils/HandleTyping.js";
+import { SpecialText } from "../utils/customizations.js";
+
+const SpecialTxtInput = document.querySelector("#Special-text");
+
+SpecialTxtInput.addEventListener('input', (event) => {
+    SpecialText(event.target.value);
+});
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const MyArrayOfButtons = Array.from(document.querySelectorAll(".keycap"));
@@ -43,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ActivateKey = (key) => {
     const button = buttonMap[key.toLowerCase()];
-    console.log(key, "=", button.textContent);
+    //console.log(key, "=", button.textContent);
 
     if (!button) return;
 
@@ -69,10 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   document.addEventListener("keydown", (event) => {
+    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+        return;
+      }
     event.preventDefault();
 
     let key = event.key;
-
     const keyMap = {
       Dead: "^",
       " ": "Space",
@@ -90,6 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("keyup", (event) => {
+    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+        return;
+      }
     event.preventDefault();
     let key = event.key;
     const keyMap = {

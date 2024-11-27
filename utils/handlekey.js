@@ -8,7 +8,6 @@ const HandleKeyApply = (element, action) => {
     TheWorkingTable = MyCrtls;
   } else if (element.textContent == "Enter") {
     TheWorkingTable = MyEnters;
-    console.log(MyEnters);
   } else {
     TheWorkingTable = MyShifts;
   }
