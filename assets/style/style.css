@@ -30,3 +30,16 @@
   position: relative;
   box-sizing: border-box;
 }
+
+/*
+#Phrase span {
+  overflow: hidden;
+  animation: cursor 0.5s step-end infinite alternate-reverse;
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+  */
