@@ -1,13 +1,14 @@
+
+
 function isValidHexColor(value) {
     const hexRegex = /^#[0-9A-Fa-f]{6}$/;
     return hexRegex.test(value);
 }
 
-
 const SpecialBackground = (value) => {
-    const SpecialButtons = document.querySelectorAll(".special");
+  const Specials = document.querySelectorAll(".special");
     if (value.length === 7 && isValidHexColor(value)) {
-        SpecialButtons.forEach((special) => {
+        Specials.forEach((special) => {
           special.classList.remove("bg-[#FE6628]");
           special.style.setProperty('--dynamic-bg-color',value);
           special.classList.add('bg-custom');
@@ -39,9 +40,9 @@ const StandardTextColor = (value) =>{
 }
 
 const SpecialTextColor = (value)=>{
-const SpecialButtons = document.querySelectorAll(".special")
+  const Specials = document.querySelectorAll(".special");
   if (value.length === 7 && isValidHexColor(value)) {
-    SpecialButtons.forEach((key)=>{
+    Specials.forEach((key)=>{
       key.classList.remove("text-white");
       key.style.setProperty('--dynamic-text-color',value);
       key.classList.add('text-custom');
@@ -49,4 +50,20 @@ const SpecialButtons = document.querySelectorAll(".special")
   }
 }
 
-export { SpecialBackground , StandardBackground ,StandardTextColor ,SpecialTextColor }
+
+const RefreshDefault = () =>{
+  const Specials = document.querySelectorAll(".special");
+  const Standards = document.querySelectorAll(".keycap")
+
+  Specials.forEach((key)=>{
+    key.classList.remove("bg-custom");
+    key.style.removeProperty('--dynamic-bg-color');
+    key.classList.add("bg-[#FE6628]");
+  })
+  Standards.forEach((key)=>{
+    key.classList.remove("text-custom");
+    key.style.removeProperty('--dynamic-text-color');
+
+  })
+}
+export { SpecialBackground , StandardBackground ,StandardTextColor ,SpecialTextColor ,RefreshDefault }

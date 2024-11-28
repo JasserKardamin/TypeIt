@@ -54,6 +54,13 @@ const AZERTY = [
   "! §",
 ];
 
+const QWERTY = [
+  "~ `", "1 !", "2 @", "3 #", "4 $", "5 %", "6 ^", "7 &", "8 *", "9 (", "0 )", "- _", "+ =", "BackSpace",
+  "Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{ [", "} ]", "| \\",
+  "CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ": ;", "\" '", "Enter ",
+  "Shift", "Z ", "X", "C", "V", "B", "N", "M", "< ,", "> .", "? /", "Shift "
+];
+
 const JavaScriptKeywords = [
   "array",
   "break",
@@ -127,4 +134,4 @@ const JavaScriptKeywords = [
   "{}",
 ];
 
-export { AZERTY, JavaScriptKeywords };
+export { AZERTY, JavaScriptKeywords , QWERTY };

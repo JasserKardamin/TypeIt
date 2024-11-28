@@ -1,32 +1,52 @@
 import { HandleKeyApply } from "../utils/handlekey.js";
-import { RenderAZERTY } from "../utils/RenderKeyboard.js";
+import { RenderAZERTY , RenderQWERTY  } from "../utils/RenderKeyboard.js";
 import { HandleTyping, LoadPhrase } from "../utils/HandleTyping.js";
-import { SpecialBackground , StandardBackground , StandardTextColor , SpecialTextColor} from "../utils/customizations.js";
+import { SpecialBackground , StandardBackground , StandardTextColor , SpecialTextColor , RefreshDefault} from "../utils/customizations.js";
 
 
 const SpecialButton = document.querySelector("#Special-keys");
 const StandardButton = document.querySelector("#Standard-keys");
 const StandardText = document.querySelector("#Standard-text");
 const SpecialText = document.querySelector("#Special-text")
+const Palette = document.querySelector("#Palette")
+const CustomizationsDiv = document.getElementById("customizations");
 
-
-SpecialText.addEventListener('input', (event)=>{
-  SpecialTextColor(event.target.value);
+Palette.addEventListener('click',(event)=>{
+  CustomizationsDiv.classList.toggle('flex');
+  CustomizationsDiv.classList.toggle('hidden');
 })
 
-StandardText.addEventListener('input', (event)=>{
-  StandardTextColor(event.target.value);
-})
+const applyTheme = () => {
+  SpecialText.addEventListener('input', (event) => {
+    SpecialTextColor(event.target.value);
+  })
 
-StandardButton.addEventListener('input', (event)=>{
-  StandardBackground(event.target.value);
-})
+  StandardText.addEventListener('input', (event) => {
+    StandardTextColor(event.target.value);
+  })
 
-SpecialButton.addEventListener('input', (event) => {
-  SpecialBackground(event.target.value);
-});
+  StandardButton.addEventListener('input', (event) => {
+    StandardBackground(event.target.value);
+  })
+
+  SpecialButton.addEventListener('input', (event) => {
+    SpecialBackground(event.target.value);
+  });
+}
+applyTheme();
 
 
+const RefreshTheme = (layout) => {
+  const specialTextColor = SpecialText.value;
+  const standardTextColor = StandardText.value;
+  const standardBackgroundColor = StandardButton.value;
+  const specialBackgroundColor = SpecialButton.value;
+
+  SpecialTextColor(specialTextColor);
+  StandardTextColor(standardTextColor);
+  StandardBackground(standardBackgroundColor);
+  SpecialBackground(specialBackgroundColor);
+};
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -61,10 +81,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   KeyBoardsLayout.addEventListener("change", () => {
     if (KeyBoardsLayout.value == "AZERTY") {
+      RefreshDefault();
       RenderAZERTY();
+      RefreshTheme();
       BuildButtonMap();
     } else {
-      window.location.href = window.location.href;
+      RefreshDefault();
+      RenderQWERTY();
+      RefreshTheme();
+      BuildButtonMap();
     }
   });
 
@@ -134,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     key = keyMap[key] || key;
 
-    if (event.key == "AltGraph") {
+    if (event.key == "AltGraph" ) {
       Array.from(activeKeys).forEach((cap) => {
         DisableKey(cap);
         activeKeys.delete(cap.toLowerCase());
