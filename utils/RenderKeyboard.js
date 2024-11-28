@@ -46,6 +46,12 @@ const RenderAzertySkeleton = () => {
   if ( MyLines[2].lastElementChild.classList.contains("standard")) {
     const NewEnter = document.createElement("div");
     NewEnter.classList.add("enter", "bg-[#FE6628]", "text-black", "special", "AzertyEnter");
+
+    const NewEnterFirstSpan = document.createElement("span");
+    NewShiftFirstSpan.classList.add("text-[12px]", "pl-2", "pt-1");
+    NewShiftFirstSpan.textContent = "Enter";
+    NewEnter.appendChild(NewShiftFirstSpan);
+
     MyLines[2].appendChild(NewEnter);
   }
 
