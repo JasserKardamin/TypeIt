@@ -61,9 +61,9 @@ const RefreshDefault = () =>{
     key.classList.add("bg-[#FE6628]");
   })
   Standards.forEach((key)=>{
-    key.classList.remove("text-custom");
-    key.style.removeProperty('--dynamic-text-color');
-
+    key.parentElement.classList.remove("text-custom");
+    key.parentElement.style.removeProperty('--dynamic-text-color');
+    key.parentElement.classList.add("text-black");
   })
 }
 export { SpecialBackground , StandardBackground ,StandardTextColor ,SpecialTextColor ,RefreshDefault }
