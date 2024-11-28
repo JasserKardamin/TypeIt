@@ -30,7 +30,7 @@ const StandardBackground = (value)=>{
 }
 
 const StandardTextColor = (value) =>{
-  const  Standardbuttons = document.querySelectorAll(".keycap");
+  const  Standardbuttons = document.querySelectorAll(".standard");
   if(value.length === 7 && isValidHexColor(value)) {
     Standardbuttons.forEach((key)=>{
       key.style.setProperty('--dynamic-text-color',value);
