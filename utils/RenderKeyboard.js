@@ -19,25 +19,28 @@ const RenderAzertySkeleton = () => {
     "enter",
     "font-bold",
     "bg-[#FE6628]",
-    "text-white"
+    "text-white",
+    "special"
   );
-  MyLines[1].lastElementChild.classList.remove("bg-white", "text-black");
+  MyLines[1].lastElementChild.classList.remove("bg-white", "text-black","standard");
   EnterButton.classList.remove(
     "w-[90px]",
     "bg-[#FE6628]",
     "text-white",
     "enter",
-    "font-bold"
+    "font-bold",
+    "special"
   );
-  EnterButton.classList.add("w-[38px]", "bg-white", "text-black");
+  EnterButton.classList.add("w-[38px]", "bg-white", "text-black","standard");
   const NewEnter = document.createElement("div");
-  NewEnter.classList.add("AzertyEnter", "enter", "bg-[#FE6628]", "text-black");
+  NewEnter.classList.add("AzertyEnter", "enter", "bg-[#FE6628]", "text-black","special");
+
   MyLines[2].appendChild(NewEnter);
   //REFRESHING ENTER BUTTONS
   MyEnters = document.querySelectorAll(".enter");
 
   //modifying the shift
-  MyLines[3].lastElementChild.classList.remove("w-[112px]", "Shift");
+  MyLines[3].lastElementChild.classList.remove("w-[112px]", "Shift" ,"font-bold");
   MyLines[3].lastElementChild.classList.add("w-[38px]");
 
   const NewShift = document.createElement("div");
@@ -47,7 +50,8 @@ const RenderAzertySkeleton = () => {
     "AzertyShift",
     "Shift",
     "bg-white",
-    "text-black"
+    "text-black",
+    "standard"
   );
 
   const NewShiftFirstSpan = document.createElement("span");

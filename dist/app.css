@@ -964,8 +964,16 @@ video {
 }
 
 .active {
-  background-color: #575757;
+  background-color: #575757 !important ;
   color: white;
+}
+
+.bg-custom {
+  background-color: var(--dynamic-bg-color);
+}
+
+.text-custom {
+  color: var(--dynamic-text-color);
 }
 
 .AzertyEnter {

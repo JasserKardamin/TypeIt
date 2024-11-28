@@ -1,12 +1,29 @@
 import { HandleKeyApply } from "../utils/handlekey.js";
 import { RenderAZERTY } from "../utils/RenderKeyboard.js";
 import { HandleTyping, LoadPhrase } from "../utils/HandleTyping.js";
-import { SpecialText } from "../utils/customizations.js";
+import { SpecialBackground , StandardBackground , StandardTextColor , SpecialTextColor} from "../utils/customizations.js";
 
-const SpecialTxtInput = document.querySelector("#Special-text");
 
-SpecialTxtInput.addEventListener('input', (event) => {
-    SpecialText(event.target.value);
+const SpecialButton = document.querySelector("#Special-keys");
+const StandardButton = document.querySelector("#Standard-keys");
+const StandardText = document.querySelector("#Standard-text");
+const SpecialText = document.querySelector("#Special-text")
+
+
+SpecialText.addEventListener('input', (event)=>{
+  SpecialTextColor(event.target.value);
+})
+
+StandardText.addEventListener('input', (event)=>{
+  StandardTextColor(event.target.value);
+})
+
+StandardButton.addEventListener('input', (event)=>{
+  StandardBackground(event.target.value);
+})
+
+SpecialButton.addEventListener('input', (event) => {
+  SpecialBackground(event.target.value);
 });
 
 
