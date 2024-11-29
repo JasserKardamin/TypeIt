@@ -8,7 +8,7 @@ import {
   StandardBackground,
   StandardTextColor,
   SpecialTextColor,
-  RefreshDefault
+  RefreshDefault,
 } from "../utils/customizations.js";
 
 // Customization Palette Toggle
@@ -25,17 +25,26 @@ const applyTheme = () => {
   const standardText = document.querySelector("#Standard-text");
   const specialText = document.querySelector("#Special-text");
 
-  specialText.addEventListener("input", (event) => SpecialTextColor(event.target.value));
-  standardText.addEventListener("input", (event) => StandardTextColor(event.target.value));
-  standardButton.addEventListener("input", (event) => StandardBackground(event.target.value));
-  specialButton.addEventListener("input", (event) => SpecialBackground(event.target.value));
+  specialText.addEventListener("input", (event) =>
+    SpecialTextColor(event.target.value)
+  );
+  standardText.addEventListener("input", (event) =>
+    StandardTextColor(event.target.value)
+  );
+  standardButton.addEventListener("input", (event) =>
+    StandardBackground(event.target.value)
+  );
+  specialButton.addEventListener("input", (event) =>
+    SpecialBackground(event.target.value)
+  );
 };
 
 // Refresh Theme Colors
 const refreshTheme = () => {
   const specialTextColor = document.querySelector("#Special-text").value;
   const standardTextColor = document.querySelector("#Standard-text").value;
-  const standardBackgroundColor = document.querySelector("#Standard-keys").value;
+  const standardBackgroundColor =
+    document.querySelector("#Standard-keys").value;
   const specialBackgroundColor = document.querySelector("#Special-keys").value;
 
   SpecialTextColor(specialTextColor);
@@ -48,9 +57,11 @@ const refreshTheme = () => {
 const manageKeys = () => {
   const myArrayOfButtons = Array.from(document.querySelectorAll(".keycap"));
   const buttonMap = {};
+  const windowsBug = [];
   const activeKeys = new Set();
 
-  const clearButtonMap = () => Object.keys(buttonMap).forEach((key) => delete buttonMap[key]);
+  const clearButtonMap = () =>
+    Object.keys(buttonMap).forEach((key) => delete buttonMap[key]);
 
   const buildButtonMap = () => {
     clearButtonMap();
@@ -66,6 +77,11 @@ const manageKeys = () => {
   };
 
   const activateKey = (key) => {
+    if (key === "Ctrl" && windowsBug.includes("AltG")) {
+      windowsBug.splice(0, windowsBug.length);
+      return;
+    }
+
     const button = buttonMap[key.toLowerCase()];
     if (!button) return;
 
@@ -75,6 +91,11 @@ const manageKeys = () => {
     } else {
       button.parentElement.classList.add("active");
     }
+
+    if (key == "AltG") {
+      windowsBug.push(key);
+    }
+
     activeKeys.add(key.toLowerCase());
   };
 
@@ -91,15 +112,10 @@ const manageKeys = () => {
   };
 
   document.addEventListener("keydown", (event) => {
-    let key;
     if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
     event.preventDefault();
-    if (event.key === "AltGraph" && event.key === "Control") {
-      [...activeKeys].indexOf("altgraph") > [...activeKeys].indexOf("control") ? key = "AltGraph" : key = "Control"
-    }
-    else {
-       key = keyMap[event.key] || event.key;
-    }
+
+    const key = keyMap[event.key] || event.key;
     activateKey(key);
     HandleTyping(event.key);
   });
