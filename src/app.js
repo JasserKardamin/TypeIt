@@ -91,10 +91,15 @@ const manageKeys = () => {
   };
 
   document.addEventListener("keydown", (event) => {
+    let key;
     if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
     event.preventDefault();
-
-    const key = keyMap[event.key] || event.key;
+    if (event.key === "AltGraph" && event.key === "Control") {
+      [...activeKeys].indexOf("altgraph") > [...activeKeys].indexOf("control") ? key = "AltGraph" : key = "Control"
+    }
+    else {
+       key = keyMap[event.key] || event.key;
+    }
     activateKey(key);
     HandleTyping(event.key);
   });
