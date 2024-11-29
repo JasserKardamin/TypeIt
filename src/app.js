@@ -77,10 +77,6 @@ const manageKeys = () => {
   };
 
   const activateKey = (key) => {
-    if (key === "Ctrl" && windowsBug.includes("AltG")) {
-      windowsBug.splice(0, windowsBug.length);
-      return;
-    }
 
     const button = buttonMap[key.toLowerCase()];
     if (!button) return;
@@ -90,10 +86,6 @@ const manageKeys = () => {
       HandleKeyApply(button, "enable");
     } else {
       button.parentElement.classList.add("active");
-    }
-
-    if (key == "AltG") {
-      windowsBug.push(key);
     }
 
     activeKeys.add(key.toLowerCase());
@@ -121,10 +113,16 @@ const manageKeys = () => {
   });
 
   document.addEventListener("keyup", (event) => {
+    let key;
     if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
     event.preventDefault();
 
-    const key = keyMap[event.key] || event.key;
+    if(event.key === "AltGraph") {
+      key = keyMap["AltGraph"]
+      }
+    else{
+     key = keyMap[event.key] || event.key;
+    }
     if (event.key === "AltGraph") {
       activeKeys.forEach((cap) => {
         disableKey(cap);
