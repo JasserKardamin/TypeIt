@@ -134,4 +134,14 @@ const JavaScriptKeywords = [
   "{}",
 ];
 
-export { AZERTY, JavaScriptKeywords , QWERTY };
+const keyMap = {
+  Dead: "^",
+  " ": "Space",
+  AltGraph: "AltG",
+  "#": "3",
+  Escape: "ESC",
+  Control: "Ctrl",
+};
+
+
+export {AZERTY, QWERTY, JavaScriptKeywords , keyMap};

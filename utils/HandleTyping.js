@@ -58,9 +58,7 @@ const GetBackToTheFirstSpace = () => {
 };
 
 const HandleTyping = (key) => {
-  //console.log(i);
-  //console.log(WorkingPhrase.length - 1);
-
+  const KeysToIgnore = ["AltGraph","Alt","Shift","Tab","CapsLock","Control"];
   if (i < WorkingPhrase.length - 1) {
     if (PhraseTable[i].textContent == "∘" && key == " ") {
       PhraseTable[i].style.color = "green";
@@ -68,7 +66,9 @@ const HandleTyping = (key) => {
       PhraseTable[i].style.borderBottom = "";
       i += 1;
       PhraseTable[i].style.borderBottom = "2px solid white";
-    } else if (PhraseTable[i].textContent === key) {
+    }else if( KeysToIgnore.includes(key)){
+
+    }else if (PhraseTable[i].textContent === key ) {
       PhraseTable[i].style.color = "white";
       PhraseTable[i].style.opacity = "1";
       PhraseTable[i].style.borderBottom = "";
