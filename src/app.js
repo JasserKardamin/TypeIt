@@ -109,8 +109,9 @@ const manageKeys = () => {
     const isAltGr = event.getModifierState("AltGraph");
 
       let key = event.key;
+
       if (isAltGr) {
-        console.log("AltGr pressed");
+        key = keyMap["AltGraph"]
       } else {
         key = keyMap[key] || key;
       }
