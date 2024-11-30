@@ -57,7 +57,7 @@ const refreshTheme = () => {
 const manageKeys = () => {
   const myArrayOfButtons = Array.from(document.querySelectorAll(".keycap"));
   const buttonMap = {};
-  const windowsBug = [];
+  let windowsBug = [];
   const activeKeys = new Set();
 
   const clearButtonMap = () =>
@@ -81,13 +81,22 @@ const manageKeys = () => {
     const button = buttonMap[key.toLowerCase()];
     if (!button) return;
 
+    if(key === "Ctrl") {
+      if(windowsBug.includes("AltG")) {
+        windowsBug = [];
+        return;
+      }
+    }
+
     const modifierKeys = ["Shift", "Ctrl", "Enter"];
     if (modifierKeys.includes(button.textContent)) {
       HandleKeyApply(button, "enable");
     } else {
       button.parentElement.classList.add("active");
     }
-
+	  if (key === "AltG") {
+      windowsBug.push(key);
+	  }
     activeKeys.add(key.toLowerCase());
   };
 
@@ -117,12 +126,8 @@ const manageKeys = () => {
     if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
     event.preventDefault();
 
-    if(event.key === "AltGraph") {
-      key = keyMap["AltGraph"]
-      }
-    else{
      key = keyMap[event.key] || event.key;
-    }
+
     if (event.key === "AltGraph") {
       activeKeys.forEach((cap) => {
         disableKey(cap);
