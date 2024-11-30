@@ -102,19 +102,24 @@ const manageKeys = () => {
     }
   };
 
+  var altgflag = false;
   document.addEventListener("keydown", (event) => {
     if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
     event.preventDefault();
 
-    const isAltGr = event.getModifierState("AltGraph");
+    if(event.key === "AltGraph") {
+      console.log("altg pressed");
+      altgflag = true;
+    }
+    console.log(altgflag)
+  if(event.key==="Control" && altgflag) {
+    console.log("control pressed ")
+    activateKey("AltGraph");
+    HandleTyping("AltGraph");
+    return;
+    }
 
-      let key = event.key;
-
-      if (isAltGr) {
-        key = keyMap["AltGraph"]
-      } else {
-        key = keyMap[key] || key;
-      }
+    const key = keyMap[event.key] || event.key;
     activateKey(key);
     HandleTyping(event.key);
   });
@@ -127,6 +132,7 @@ const manageKeys = () => {
      key = keyMap[event.key] || event.key;
 
     if (event.key === "AltGraph") {
+      altgflag = false;
       activeKeys.forEach((cap) => {
         disableKey(cap);
         activeKeys.delete(cap.toLowerCase());
