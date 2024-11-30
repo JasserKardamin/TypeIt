@@ -77,16 +77,8 @@ const manageKeys = () => {
   };
 
   const activateKey = (key) => {
-
     const button = buttonMap[key.toLowerCase()];
     if (!button) return;
-
-    if(key === "Ctrl") {
-      if(windowsBug.includes("AltG")) {
-        windowsBug = [];
-        return;
-      }
-    }
 
     const modifierKeys = ["Shift", "Ctrl", "Enter"];
     if (modifierKeys.includes(button.textContent)) {
@@ -94,9 +86,7 @@ const manageKeys = () => {
     } else {
       button.parentElement.classList.add("active");
     }
-	  if (key === "AltG") {
-      windowsBug.push(key);
-	  }
+
     activeKeys.add(key.toLowerCase());
   };
 
@@ -116,7 +106,14 @@ const manageKeys = () => {
     if (["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
     event.preventDefault();
 
-    const key = keyMap[event.key] || event.key;
+    const isAltGr = event.getModifierState("AltGraph");
+
+      let key = event.key;
+      if (isAltGr) {
+        console.log("AltGr pressed");
+      } else {
+        key = keyMap[key] || key;
+      }
     activateKey(key);
     HandleTyping(event.key);
   });
