@@ -1001,9 +1001,6 @@ video {
 }
 
 #keyboardlayout {
-  appearance: none;       
-  -webkit-appearance: none;
-  -moz-appearance: none;
   background-color: #1a1a1a;
   color: white;
   border: 1px solid #343434;
