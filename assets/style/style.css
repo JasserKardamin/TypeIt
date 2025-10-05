@@ -38,6 +38,27 @@
     box-sizing: border-box;
 }
 
+#keyboardlayout {
+  appearance: none;       
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #343434;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+
+#keyboardlayout::after {
+  content: "▼"; 
+  position: absolute;
+  right: 1rem;
+  pointer-events: none;
+}
+
 /*
 #Phrase span {
   overflow: hidden;
