@@ -1014,13 +1014,6 @@ video {
 }
 
 
-#keyboardlayout::after {
-  content: "▼"; 
-  position: absolute;
-  right: 1rem;
-  pointer-events: none;
-}
-
 /*
 #Phrase span {
   overflow: hidden;
