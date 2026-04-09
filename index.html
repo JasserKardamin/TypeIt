@@ -9,7 +9,7 @@
 
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=palette"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
     </head>
     <body
@@ -495,6 +495,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Phone users lock screen -->
+        <div id="mobile-lock" class="fixed inset-0 z-[100] flex md:hidden flex-col items-center justify-center bg-[#1B1B1B] text-white p-8 text-center transition-opacity duration-300">
+            <span class="material-symbols-outlined text-6xl mb-6 text-[#FE6628]">desktop_windows</span>
+            <h1 class="text-3xl font-bold mb-4 tracking-wide text-white drop-shadow-md">PC Only Experience</h1>
+            <p class="text-[#8C8C8C] text-lg max-w-sm leading-relaxed">
+                This game is specifically designed for a full keyboard. Please switch to a larger screen or PC to play and learn typing.
+            </p>
+        </div>
+
+        <!-- Smooth bottom info tooltip (Expands on hover) -->
+        <div style="animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; opacity: 0; transform: translate(-50%, 20px);" class="group fixed bottom-8 left-1/2 flex items-center justify-start h-14 max-w-[56px] hover:max-w-[600px] overflow-hidden bg-[#343434]/90 backdrop-blur-sm border border-[#4F4F4F] shadow-[0_8px_30px_rgb(0,0,0,0.4)] rounded-full transition-[max-width,padding] duration-500 ease-out z-40 hidden md:flex cursor-default p-[7px]">
+            
+            <div class="flex-shrink-0 flex items-center justify-center bg-[#FE6628]/20 rounded-full h-[40px] w-[40px] transition-transform duration-500 group-hover:bg-[#FE6628]/30">
+                <span class="material-symbols-outlined text-[#FE6628] text-[22px]">info</span>
+            </div>
+            
+            <p class="text-[#D4D4D4] text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 pl-3 pr-4 mb-[2px]">
+                The circles are checkpoints, press <kbd class="mx-1 px-2 py-1 bg-[#1B1B1B] text-white border border-[#4F4F4F] rounded-md text-xs font-bold shadow-sm inline-block translate-y-[1px]">Space</kbd> to pass them!
+            </p>
+
+            <style>
+                @keyframes slideUpFade {
+                    0% {
+                        opacity: 0;
+                        transform: translate(-50%, 30px);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: translate(-50%, 0);
+                    }
+                }
+            </style>
+        </div>
+
         <script type="module" src="./utils/RenderKeyboard.js"></script>
         <script type="module" src="./src/app.js" defer></script>
     </body>
